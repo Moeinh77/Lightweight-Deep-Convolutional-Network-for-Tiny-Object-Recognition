@@ -17,6 +17,11 @@ the accuracy of 73.65% on CIFAR-100.
 
 ![](http://www.mediafire.com/convkey/8abb/6q2a2edfrx0c4a6zg.jpg)
 
+DCTI has 5 phases of convolutional layers. We use all filters with receptive field 3x3 for all convolutional layers. All hidden layers are equipped with the rectification (ReLUs (Krizhevsky et al., 2017b)) non-linearity. **We use dropout and batch-normalization after each convolutional layer.**
+
+Instead of using one convolutional layer with the kernel size 5 × 5, in this architecture two convolutional layers with kernel size 3 × 3 is used. Using two convolutional filers size 3 × 3 is equivalent to one convolutional filter size 5 × 5. By this way, **we reduce parameters and push network going deeper.**
+
+In final phase, we use global average pooling layer to feed directly feature maps into feature vectors. From feature vectors, we apply fully connected and softmax to calculate probability each class.
 
 ### Dataset
 
