@@ -1,6 +1,4 @@
-# Lightweight-Deep-Convolutional-Network-for-Tiny-Object-Recognition
-
-Implementation of paper :Lightweight Deep Convolutional Network for Tiny Object Recognition
+# Lightweight Deep Convolutional Network for Tiny Object Recognition
 
 ### Introduction
 In this paper,a Lightweight Deep Convolutional Neural Network architecture is proposed for tiny images codenamed “DCTI” to reduce significantly a number of parameters for such datasets. Additionally, we use batch-normalization to deal with
