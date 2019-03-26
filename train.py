@@ -38,12 +38,11 @@ train_set = torchvision.datasets.CIFAR10(root='./cifardata',
 test_set = torchvision.datasets.CIFAR10(root='./cifardata', 
                                         train=False, download=True, transform=test_transform)
 
-train_set,valid_set = torch.utils.data.random_split(train_set,(49000,1000))
+test_set,valid_set = torch.utils.data.random_split(test_set,(5000,5000))
 
 print(len(test_set),"  ",len(valid_set))
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-device
 
 train_loader = torch.utils.data.DataLoader(train_set,
                                            batch_size=64)#, sampler=train_sampler, num_workers=10)
@@ -227,11 +226,7 @@ def trainNet(model, batch_size, n_epochs, learning_rate):
         epoch_time = 0
         
         for i, data in enumerate(train_loader, 0):
-            
-            #free up the cuda memory
-            inputs=None
-            labels=None
-        
+                  
             inputs, labels = data
             
             inputs, labels = Variable(inputs.to(device)), Variable(labels.to(device))
@@ -290,6 +285,5 @@ def trainNet(model, batch_size, n_epochs, learning_rate):
 
 CNN = SimpleCNN().to(device)
 CNN.eval()
+
 trainNet(CNN, batch_size=64, n_epochs=250, learning_rate=0.1)
-
-
