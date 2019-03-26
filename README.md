@@ -1,6 +1,9 @@
 # Lightweight-Deep-Convolutional-Network-for-Tiny-Object-Recognition
 Implementation of paper :Lightweight Deep Convolutional Network for Tiny Object Recognition
 
+### Net Architecture
+![](http://www.mediafire.com/convkey/8abb/6q2a2edfrx0c4a6zg.jpg)
+
 ### Dataset
 ------------------------
 [Link to dataset](https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz)
