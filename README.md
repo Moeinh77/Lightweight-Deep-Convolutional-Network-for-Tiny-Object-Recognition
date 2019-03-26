@@ -2,9 +2,7 @@
 
 ### Introduction
 In this paper,a Lightweight Deep Convolutional Neural Network architecture is proposed for tiny images codenamed “DCTI” to reduce significantly a number of parameters for such datasets. Additionally, we use batch-normalization to deal with
-the change in distribution each layer. To demonstrate the efficiency of the proposed method, we conduct exper-
-iments on two popular datasets: CIFAR-10 and CIFAR-100. The results show that the proposed network not
-only significantly reduces the number of parameters but also improves the performance. The number of pa-
+the change in distribution each layer. To demonstrate the efficiency of the proposed method, we conduct experiments on popular dataset: CIFAR-10. The results show that the proposed network not only significantly reduces the number of parameters but also improves the performance. The number of pa-
 rameters in our method is only 21.33% the number of parameters of Wide ResNet but our method achieves up
 to 94.34% accuracy on CIFAR-10, comparing to 96.11% of Wide ResNet. Besides, our method also achieves
 the accuracy of 73.65% on CIFAR-100.
