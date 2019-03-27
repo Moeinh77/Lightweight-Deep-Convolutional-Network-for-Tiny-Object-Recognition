@@ -250,7 +250,8 @@ def trainNet(model, batch_size, n_epochs, learning_rate):
         total_val_loss = 0
 
         for inputs, labels in val_loader:
-            
+          
+            inputs,labels=Variable(inputs.to(device)),Variable(labels.to(device))
             model.eval()
             y_pred = model(inputs)
             total_val_loss  += loss(y_pred, labels)
