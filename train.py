@@ -204,11 +204,7 @@ def trainNet(model, batch_size, n_epochs, learning_rate):
         #save the weightsevery 10 epochs
         if epoch % 10 == 0 :
             torch.save(model.state_dict(), 'model.ckpt')
-
-        
-        #print('learning rate : {:.3f} '.format(lr))     
-        #Create our loss and optimizer functions
-                
+      
         running_loss = 0.0
         print_every = n_batches // 10
         start_time = time.time()
@@ -217,7 +213,7 @@ def trainNet(model, batch_size, n_epochs, learning_rate):
         epoch_time = 0
         
         for i, data in enumerate(train_loader, 0):
-                  
+             
             inputs, labels = data
             
             inputs, labels = Variable(inputs.to(device)), Variable(labels.to(device))
@@ -228,7 +224,7 @@ def trainNet(model, batch_size, n_epochs, learning_rate):
             
             score, predictions = torch.max(outputs.data, 1)
             acc = (labels==predictions).sum()
-            total_train_acc += acc
+            total_train_acc += acc.item()
             
             loss_size = loss(outputs, labels)
             loss_size.backward()
@@ -250,27 +246,27 @@ def trainNet(model, batch_size, n_epochs, learning_rate):
                 start_time = time.time()
             
         
-        torch.cuda.empty_cache() 
         #At the end of the epoch, do a pass on the validation set
         total_val_loss = 0
 
         for inputs, labels in val_loader:
             
-            #Wrap tensors in Variables
-            inputs, labels = Variable(inputs.to(device)), Variable(labels.to(device))
-            
-            #Forward pass
-            val_outputs = model(inputs)
-            val_loss_size = loss(val_outputs, labels)
-            total_val_loss += val_loss_size.item()
+            model.eval()
+            y_pred = model(inputs)
+            total_val_loss  += loss(y_pred, labels)
+            score, predictions = torch.max(y_pred.data, 1)
+            acc = (labels==y_pred).sum()
+            total_val_acc += acc.item()
         
-        print("-"*30)
-        print("Train loss = {:.2f} | Train acc = {:.1f}% | Val loss={:.2f} | took: {:.2f}s".format(
-            total_train_loss / len(train_loader),total_train_acc/ len(train_loader)
-            ,total_val_loss/len(val_loader),epoch_time))
-        print("="*60)
         
         scheduler.step(total_val_loss)
+        
+        print("-"*30)
+        print("Train loss = {:.2f} | Train acc = {:.1f}% | Val loss={:.2f} | Val acc: {:.2f} | took: {:.2f}s".format(
+            total_train_loss / len(train_loader),total_train_acc/ len(train_loader)
+            ,total_val_loss/len(val_loader),total_val_acc/len(val_loader),epoch_time))
+        print("="*60)
+        
         
     print("Training finished, took {:.2f}s".format(time.time() - training_start_time))
 
