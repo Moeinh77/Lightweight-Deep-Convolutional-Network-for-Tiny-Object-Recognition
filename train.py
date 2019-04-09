@@ -4,6 +4,8 @@ import torch.nn.functional as F
 import torchvision
 import torchvision.transforms as transforms
 import numpy as np
+import torch.nn.init as weight_init
+
 seed = 7
 np.random.seed(seed)
 torch.manual_seed(seed)
@@ -73,7 +75,18 @@ class SimpleCNN(torch.nn.Module):
         self.conv2d_42 = torch.nn.Conv2d(512, 512, kernel_size = 3, stride = 1, padding = 1)
 
         self.conv2d_51 = torch.nn.Conv2d(512, 512, kernel_size = 3, stride = 1, padding = 1)
-
+        
+        weight_init.xavier_uniform_(self.conv2d_11.weight)
+        weight_init.xavier_uniform_(self.conv2d_12.weight)
+        weight_init.xavier_uniform_(self.conv2d_21.weight)
+        weight_init.xavier_uniform_(self.conv2d_22.weight)
+        weight_init.xavier_uniform_(self.conv2d_31.weight)
+        weight_init.xavier_uniform_(self.conv2d_32.weight)
+        weight_init.xavier_uniform_(self.conv2d_33.weight)
+        weight_init.xavier_uniform_(self.conv2d_41.weight)
+        weight_init.xavier_uniform_(self.conv2d_42.weight)
+        weight_init.xavier_uniform_(self.conv2d_51.weight)
+        
         self.Batchnorm_1=torch.nn.BatchNorm2d(64)
         self.Batchnorm_2=torch.nn.BatchNorm2d(128)
         self.Batchnorm_3=torch.nn.BatchNorm2d(256)
